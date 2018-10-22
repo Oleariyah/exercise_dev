@@ -60,8 +60,8 @@ class App extends Component {
           data.todos = data.todos.map(x => x.id === todo.id ? ({...todo, complete: !todo.complete}) : x)
           // Write our data back to the cache.
           store.writeQuery({ query: TodosQuery, data});
-          console.log(store);
-        }
+        },
+        refetchQueries:[{ mutation: UpdateMutation}]
       })
     };
 
@@ -79,8 +79,8 @@ class App extends Component {
             data.todos = data.todos.filter(x => x.id !== todo.id)
             // Write our data back to the cache.
             store.writeData({ query: TodosQuery, data});
-            console.log(data)
-          }
+          },
+          refetchQueries:[{ mutation: RemoveMutation}]
       });
       };
   createTodo = async text => {
@@ -95,9 +95,10 @@ class App extends Component {
         // Update our TodosQuery from the mutation to the end.
         data.todos.unshift(createTodo);
         // Write our data back to the cache.
-        store.updateQuery({ query: TodosQuery, data});
+        store.writeQuery({ query: TodosQuery, data});
         console.log(data)
-      }
+      },
+      refetchQueries:[{ query: TodosQuery}]
   });
 
   
@@ -114,7 +115,7 @@ class App extends Component {
     <div style={{display: 'flex'}}>
     <div style={{margin: 'auto', width: 400, padding: 100}}>
         <Paper elevation={1}>
-        <div style={{ width:300, paddingLeft:50, wordBreak: 'breakAll'}}>
+        <div style={{ width:300, paddingLeft:50}}>
           <Form submit= {this.createTodo} />
           </div>
             <List >

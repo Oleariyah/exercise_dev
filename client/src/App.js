@@ -96,7 +96,6 @@ class App extends Component {
         data.todos.unshift(createTodo);
         // Write our data back to the cache.
         store.writeQuery({ query: TodosQuery, data});
-        console.log(data)
       },
       refetchQueries:[{ query: TodosQuery}]
   });

@@ -21,7 +21,7 @@ handleKeyDown = e => {
     console.log(e);
     if (e.key === "Enter") {
         this.props.submit(this.state.text);
-        //this.setState({text:""});
+        this.setState({text:""});
     }
 };
 

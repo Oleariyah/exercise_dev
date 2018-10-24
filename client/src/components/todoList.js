@@ -11,8 +11,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Form from './form';
 import TodosQuery from '../graphql/query';
 import {UpdateMutation, CreateMutation, RemoveMutation} from '../graphql/mutation';
-import {form, todolist, wrapper} from './class/todoClass';
-
+import {form, todolist, wrapper} from '../static/todoClass';
 
 
 class TodoList extends Component {
@@ -112,7 +111,6 @@ const {
               </ListItem>
             ))}
           </List>
-        
         </Paper>
     </div>);
   }

@@ -30,27 +30,25 @@ class TodoList extends Component {
             data.todos = data.todos.map(x => x.id === todo.id ? ({...todo, complete: !todo.complete}) : x)
             // Write our data back to the cache.
             store.writeQuery({ query: TodosQuery, data});
-          },
-          refetchQueries:[{ mutation: UpdateMutation}]
+          }
         })
       };
-  
-          
+    
         //remove todo
         removeTodo = async todo => {
           await this.props.removeTodo({
             variables: {
-              id: todo.id,
+              id: todo.id
             },
             update: store => {
               // Read the data from our cache for this query.
               const data = store.readQuery({ query: TodosQuery });
               // Update our TodosQuery from the mutation to the end.
-              data.todos = data.todos.filter(x => x.id !== todo.id)
+              data.todos = data.todos.filter(x => x.id !== todo.id);
               // Write our data back to the cache.
-              store.writeData({ query: TodosQuery, data});
+            store.writeQuery({ query: TodosQuery, data});
             },
-            refetchQueries:[{ mutation: RemoveMutation}]
+            refetchQueries: [{TodosQuery}]
         });
         };
     createTodo = async text => {
@@ -69,8 +67,6 @@ class TodoList extends Component {
         },
         refetchQueries:[{ query: TodosQuery}]
     });
-  
-    
     }
    
 render() {
@@ -93,18 +89,19 @@ const {
                 role={undefined}
                 dense
                 button
-                onClick={() => this.updateTodo(todo)}
               >
                 <Checkbox
-                  checked={todo.complete}
-                  tabIndex={-1}
-                  disableRipple
-                />
+                onClick={() => this.updateTodo(todo)}
+                defaultChecked={todo.complete}
+                tabIndex={-1}
+              />
+                
                 <div style={wrapper}>
                 <ListItemText primary={todo.text} />
                 </div>
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => this.removeTodo(todo)}>
+                  <IconButton 
+                      onClick={() => this.removeTodo(todo)}>
                     <CloseIcon />
                   </IconButton>
                 </ListItemSecondaryAction>

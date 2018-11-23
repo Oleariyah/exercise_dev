@@ -3,19 +3,20 @@
 const typeDefs = `
   type Query {
     hello(name: String): String!
-    todos: [Todo]
+    exercises: [exercise]
   }
 
-  type Todo {
+  type exercise {
       id: ID!
-      text: String!
-      complete: Boolean!
+      title: String!
+      description: String!
+      muscles: String!
   }
 
   type Mutation {
-    createTodo(text: String!) : Todo
-    updateTodo(id: ID!, complete: Boolean!) : Boolean
-    removeTodo(id: ID!) : Boolean 
+    createExercise(title: String!, description: String!, muscles: String! ) : exercise
+    updateExercise(id: ID!, title: String!, description: String!) : Boolean
+    removeExercise(id: ID!) : Boolean 
 }
 `
 

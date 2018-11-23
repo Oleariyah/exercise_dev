@@ -1,30 +1,30 @@
-const Todo = require('../model/model');
+const exercises = require('../models/exercises');
 
 //resolve function
 const resolvers = {
 //Query resolver
     Query: {
     hello: (_, { name }) => `Hello ${name || 'World'}`,
-    todos: () => Todo.find()
+    exercises: () => exercises.find()
     },
 
     Mutation: {
-       //create a new todo resolver
-        createTodo: async (_, {text}) => {
-            const todo = new Todo({text, complete:false});
-            await todo.save();
-            return todo;
+       //create a new exercise resolver
+        createExercise: async (_, {title, description, muscles}) => {
+            const exercise = new exercises({title, description, muscles});
+            await exercise.save();
+            return exercise;
             },
 
         //update an exixting todo by ID
-        updateTodo: async (_, {id, complete}) => {
-            await Todo.findByIdAndUpdate(id, {complete});
+        updateExercise: async (_, {id, title, description}) => {
+            await exercises.findByIdAndUpdate(id, {title, description});
             return true;
         },
 
        //delete an existing todo by ID
-        removeTodo: async (_, {id}) => {
-            await Todo.findByIdAndRemove(id);
+        removeExercise: async (_, {id}) => {
+            await exercises.findByIdAndRemove(id);
             return true;
         }
 

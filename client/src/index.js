@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import AppContainer from './components/App';
 import * as serviceWorker from './serviceWorker';
 import {MuiThemeProvider, createMuiTheme } from "@material-ui/core/";
 import {red, amber} from "@material-ui/core/colors";
@@ -19,7 +19,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
-console.log(client)
 const theme = createMuiTheme({
   palette: {
     primary: red,
@@ -38,7 +37,7 @@ ReactDOM.render(
  
     <ApolloProvider client={client} >
       <MuiThemeProvider theme={theme}>
-        <App />
+        <AppContainer />
       </MuiThemeProvider>
     </ApolloProvider>,
      

@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # Exercise Development Mode
 
-This project is aimed at building a exercise app with MongoDB, Graphql, Apollo, React, and NodeJs.
+This project is aimed at building an exercise app with MongoDB, Graphql, Apollo, React, and NodeJs.
 The project is for study purpose and contributions are welcome.
 =======
 # exercise_dev

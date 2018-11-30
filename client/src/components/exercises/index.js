@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
+import {graphql, compose} from 'react-apollo';
 import { Grid, Paper, Typography, List } from "@material-ui/core/";
 import {
   ListItem,
@@ -9,7 +10,8 @@ import {
 import { Delete, Edit } from "@material-ui/icons/";
 import Form from "./form";
 import { withStyles } from "@material-ui/core/styles";
-import { withContext } from "../../context";
+import {RemoveMutation} from '../graphql/mutation';
+
 
 const styles = theme => ({
   paper: {
@@ -42,28 +44,42 @@ const styles = theme => ({
     }
   }
 });
+ 
+class Exercises extends Component {
+  
+  handleDelete = async id => {
+     
+    await this.props.removeExercise({
+        variables: {
+            id:id
+          }
+    });
+  };
 
-const Exercises = ({
-  classes,
-  muscles,
-  exercisesByMuscles,
-  editMode,
-  category,
-  onSelect,
-  exercise,
-  exercise: {
-    id,
-    title = "Welcome!",
-    description = "Please select an exercise from the list on the left."
-  },
-  onDelete,
-  onSelectEdit,
-  onEdit
-}) => (
-  <Grid container className={classes.container}>
+  render() {
+    
+    const {
+      classes,
+      muscles,
+      exercises,
+      editMode,
+      category,
+      onSelect,
+      exercise,
+      onSelectEdit,
+      onEdit,
+      onDelete,
+      exercise: {
+        id,
+        title = "Welcome!",
+        description = "Please select an exercise from the list on the left."
+      },
+    } = this.props
+    return (
+      <Grid container className={classes.container}>
     <Grid item className={classes.item} xs={12} sm={6}>
       <Paper className={classes.paper}>
-        {exercisesByMuscles.map(([group, exercises]) =>
+        {exercises.map(([group, exercises]) =>
           !category || category === group ? (
             <Fragment key={group}>
               <Typography
@@ -84,7 +100,11 @@ const Exercises = ({
                       >
                         <Edit />
                       </IconButton>
-                      <IconButton color="primary" onClick={() => onDelete(id)}>
+                      <IconButton color="primary" 
+                      onClick={() => {
+                        onDelete(id);
+                        this.handleDelete(id);
+                      }}>
                         <Delete />
                       </IconButton>
                     </ListItemSecondaryAction>
@@ -93,9 +113,9 @@ const Exercises = ({
               </List>
             </Fragment>
           ) : null
-        )}
-      </Paper>
-    </Grid>
+          )}
+        </Paper>
+      </Grid>
     <Grid item className={classes.item} xs={12} sm={6}>
       <Paper className={classes.paper}>
         <Typography variant="display1" color="secondary">
@@ -116,6 +136,9 @@ const Exercises = ({
       </Paper>
     </Grid>
   </Grid>
-);
+    )
+  }
+}
 
-export default withContext(withStyles(styles)(Exercises));
+export default compose( graphql(RemoveMutation, {name: 'removeExercise'}),
+withStyles(styles))(Exercises);

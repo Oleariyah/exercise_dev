@@ -7,14 +7,14 @@ mutation ($id: ID!, $title: String!, $description: String!) {
 `;
 
 const RemoveMutation = gql`
-mutation ($id: ID!) {
+mutation($id: ID!) {
   removeExercise (id: $id)
 }
 `;
 
 const CreateMutation = gql`
-mutation($title: String!, $description: String!, $muscle: String!){
-  createTodo(title: $title, description: $description, muscles: $muscles){
+mutation($title: String!, $description: String!, $muscles: String!){
+  createExercise(title: $title, description: $description, muscles: $muscles){
     id
     title
     description

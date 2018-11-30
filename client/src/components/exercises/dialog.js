@@ -6,7 +6,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';
 import Form from './form';
-import {withContext} from '../../context';
 
 class CreateDialog extends Component {
     state = {
@@ -68,4 +67,4 @@ class CreateDialog extends Component {
         </Fragment>
     )}}
 
-    export default withContext(CreateDialog)
+    export default CreateDialog;

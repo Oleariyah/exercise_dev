@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppContainer from './components/App';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import {MuiThemeProvider, createMuiTheme } from "@material-ui/core/";
 import {red, amber} from "@material-ui/core/colors";
@@ -37,7 +37,7 @@ ReactDOM.render(
  
     <ApolloProvider client={client} >
       <MuiThemeProvider theme={theme}>
-        <AppContainer />
+        <App />
       </MuiThemeProvider>
     </ApolloProvider>,
      

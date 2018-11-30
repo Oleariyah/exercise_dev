@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import {AppBar, Tabs} from '@material-ui/core/';
 import Tab from '@material-ui/core/Tab';
 import withWidth from '@material-ui/core/withWidth';
-import {withContext} from '../../context';
 
 class Footer extends Component {
 
   onIndexSelect = (e, index) => {
-      const {onCategorySelect, muscles} = this.props 
-      onCategorySelect( index === 0 ? '' : muscles[index - 1])
+      const {onSelect, muscles} = this.props 
+      onSelect( index === 0 ? '' : muscles[index - 1])
   }
 
   getIndex = () => { 
@@ -20,7 +19,7 @@ class Footer extends Component {
 
   render () {
     
-    const {width, muscles} = this.props
+    const {width, muscles } = this.props
     return (
       <AppBar position="static">
       <Tabs
@@ -43,4 +42,4 @@ class Footer extends Component {
 }
 
 
-export default withContext(withWidth()(Footer))
+export default withWidth()(Footer)
